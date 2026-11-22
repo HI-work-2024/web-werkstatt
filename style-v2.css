@@ -1,0 +1,74 @@
+/* ===== Web-Werkstatt 2.0: Erweiterungen ===== */
+.tabs button{font-size:.84rem;padding:.3em .55em}
+.lessons{max-height:calc(100vh - 170px)}
+.dash{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:.6rem;margin:0 0 1.2rem}
+.dash-i{background:var(--panel);color:var(--ink);border:1px solid var(--line);border-radius:12px;padding:.6rem;display:flex;flex-direction:column;align-items:center;gap:.1rem;box-shadow:var(--shadow)}
+.dash-i:hover{border-color:var(--accent);filter:none}
+.dash-i span{font-size:1.4rem}.dash-i b{font-size:1.05rem}.dash-i small{color:var(--muted)}
+
+/* SQL */
+.sqlcode{width:100%;min-height:150px;background:var(--code);color:var(--code-ink);border:0;border-radius:10px;padding:.8rem;font:14px/1.5 ui-monospace,Consolas,monospace;font-variant-ligatures:none}
+.sqlout{margin-top:.8rem;max-height:420px;overflow:auto}
+
+/* Terminal */
+.practice-t{display:grid;grid-template-columns:240px 1fr;gap:1rem;align-items:start}
+@media(max-width:1000px){.practice-t{grid-template-columns:1fr}}
+.terminal-t{background:#0f1218;border-radius:12px;padding:.8rem 1rem;height:430px;display:flex;flex-direction:column;font:13.5px/1.5 ui-monospace,Consolas,monospace;color:#d7dde8;font-variant-ligatures:none}
+.tm-out{flex:1;overflow-y:auto;white-space:pre-wrap;word-break:break-word}
+.tm-out .cmd{color:#8fb8ff}.tm-out .ok{color:#7ee2a8}.tm-out .err{color:#ff8b8b}.tm-out .warn{color:#ffd27a}.tm-out .dim{color:#7f889b}
+.tm-in{display:flex;gap:.5rem;border-top:1px solid #262d3b;padding-top:.5rem}
+.tm-prompt{color:#7ee2a8;white-space:nowrap}
+#tmIn{flex:1;background:transparent;border:0;color:#fff;font:inherit;outline:none}
+
+/* DNS-Zone */
+.zone{margin-top:.5rem}
+.zt input,.zt select{font:inherit;font-size:.88rem;border:1px solid var(--line);border-radius:6px;padding:.2em .4em}
+.zt .zadd td{background:#faf8ff}
+
+/* Prüfung */
+.exam-top{display:flex;gap:1rem;align-items:center;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:.6rem 1rem;margin-bottom:.7rem}
+.exam-time{margin-left:auto;font:700 1.1rem ui-monospace,Consolas,monospace;color:var(--accent)}
+.exam-nav{display:flex;flex-wrap:wrap;gap:.25rem;margin-bottom:.8rem}
+.exam-nav button{width:2.2rem;padding:.2em 0;background:var(--panel);color:var(--muted);border:1px solid var(--line);font-size:.82rem}
+.exam-nav button.done{background:var(--accent-soft);color:var(--accent);border-color:#d6c9ff}
+.exam-nav button.cur{outline:2px solid var(--accent)}
+.q-opt.chosen{border-color:var(--accent);background:var(--accent-soft)}
+ul.req{list-style:none;padding:0}
+ul.req li{margin:.25em 0}
+ul.req li.y{color:var(--green)}
+
+/* Zertifikat */
+.cert{position:relative;max-width:900px;margin:1.5rem auto;background:#fffdf7;border:12px solid #efe9ff;outline:2px solid #c9b8ff;outline-offset:-22px;padding:2.5rem 3rem;text-align:center;box-shadow:var(--shadow);overflow:hidden}
+.cert .wm{position:absolute;inset:0;display:grid;place-items:center;font:800 6rem system-ui;color:rgba(109,61,245,.08);transform:rotate(-20deg);pointer-events:none}
+.cert-logo{font:800 2rem ui-monospace,Consolas,monospace;color:var(--accent)}
+.cert-k{letter-spacing:.35em;text-transform:uppercase;color:var(--muted);font-size:.85rem;margin:.3rem 0}
+.cert h2{margin:.2rem 0;font:700 2.2rem Georgia,"Times New Roman",serif;color:#2b1d63}
+.cert-sub{color:var(--muted);margin-top:0}
+.cert-name{font:italic 600 2.3rem Georgia,"Times New Roman",serif;color:var(--accent);margin:.4rem 0;border-bottom:1px solid #d6c9ff;display:inline-block;padding:0 1.5rem .2rem}
+.cert-list{list-style:none;padding:0;margin:1rem auto;max-width:560px;text-align:left}
+.cert-list li{padding:.25rem 0;border-bottom:1px dashed #e4dcff}
+.cert-foot{display:flex;justify-content:space-around;margin-top:2rem;gap:2rem;flex-wrap:wrap}
+.cert-foot>div{min-width:220px;border-top:1px solid #999;padding-top:.3rem}
+.cert-date{font:600 1.1rem Georgia,serif;margin:0 0 .2rem}
+.sig{font:italic 400 2rem "Segoe Script","Brush Script MT","Lucida Handwriting",cursive;color:#2b1d63;margin:0 0 .1rem}
+.cert-id{margin-top:1.4rem;font-size:.75rem;color:var(--muted);font-family:ui-monospace,Consolas,monospace}
+
+/* Spickzettel & Über */
+.sp-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(380px,1fr));gap:1rem}
+.sp table{width:100%;border-collapse:collapse;font-size:.88rem}
+.sp td{padding:.3rem .2rem;border-bottom:1px solid var(--line);vertical-align:top}
+.sp td:first-child{width:55%}
+.sp code{white-space:pre-wrap;word-break:break-word}
+.about{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+@media(max-width:900px){.about{grid-template-columns:1fr}}
+
+/* Druck: Zertifikat bzw. Spickzettel */
+@media print{
+  body{background:#fff}
+  .top,.tabs,footer,.panel:not(.active){display:none!important}
+  #pruefung.active>*:not(#certOut),#certOut>p{display:none!important}
+  .cert{box-shadow:none;margin:0 auto;page-break-inside:avoid}
+  body.print-spick .intro,body.print-spick .filterbar{display:none}
+  body.print-spick .sp-grid{display:block}
+  body.print-spick .sp{page-break-inside:avoid;margin-bottom:.6rem;box-shadow:none}
+}

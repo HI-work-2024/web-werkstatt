@@ -1,0 +1,56 @@
+/* Web-Werkstatt 3.1 · Themen-Optik je Seite (Farben/Muster setzt js/mod-theme.js)
+   © 2026 Ibtissam Hommada */
+:root{--c1:#4c1d95;--c2:#7c3aed}
+
+/* Hintergrund der Seite: dezentes, themenbezogenes Technik-Muster */
+body{background-color:var(--bg);background-image:var(--pat-body);background-attachment:fixed;transition:background-color .3s}
+main{position:relative}
+main::before{content:"";position:fixed;top:var(--top);right:0;width:55vw;height:420px;background:radial-gradient(closest-side,color-mix(in srgb,var(--c2) 16%,transparent),transparent);pointer-events:none;z-index:0;opacity:.7}
+main>*{position:relative;z-index:1}
+
+/* Seitenkopf als Themen-Banner */
+.panel>.intro.themed{position:relative;overflow:hidden;color:#fff;background:linear-gradient(125deg,var(--c1) 0%,var(--c2) 100%);border:0;border-radius:24px;padding:1.6rem 310px 1.5rem 1.9rem;margin-bottom:2rem;min-height:200px;box-shadow:0 18px 40px -18px color-mix(in srgb,var(--c1) 70%,transparent)}
+.panel>.intro.themed::before{content:"";position:absolute;inset:0;background-image:var(--pat-banner);pointer-events:none}
+.panel>.intro.themed::after{content:"";position:absolute;inset:0;background:radial-gradient(600px 220px at 85% 50%,rgba(255,255,255,.16),transparent 70%);pointer-events:none}
+.panel>.intro.themed>*{position:relative;z-index:1}
+.intro.themed .crumb,.intro.themed .crumb b{color:rgba(255,255,255,.85)}
+.intro.themed .crumb b{font-weight:700}
+.intro.themed h2{color:#fff;text-shadow:0 2px 12px rgba(0,0,0,.18)}
+.intro.themed p{color:rgba(255,255,255,.93)}
+.intro.themed code{background:rgba(255,255,255,.18);color:#fff}
+.intro.themed a{color:#fff}
+.intro.themed b{color:#fff}
+.intro.themed .page-meta span{background:rgba(255,255,255,.16);border-color:rgba(255,255,255,.32);color:#fff;backdrop-filter:blur(4px)}
+.intro.themed .illu{position:absolute;right:1.6rem;top:50%;transform:translateY(-50%);width:260px;height:auto;z-index:1;filter:drop-shadow(0 8px 20px rgba(0,0,0,.18));animation:illuIn .6s ease-out both}
+@keyframes illuIn{from{transform:translateY(-46%)}to{transform:translateY(-50%)}}
+@media (prefers-reduced-motion:reduce){.intro.themed .illu{animation:none}}
+[data-theme="dark"] .panel>.intro.themed{background:linear-gradient(125deg,color-mix(in srgb,var(--c1) 80%,#000) 0%,color-mix(in srgb,var(--c2) 75%,#000) 100%)}
+
+/* Startseite: Hero bekommt das Platinen-Muster */
+.hero::before{content:"";position:absolute;inset:0;background-image:var(--pat-banner);pointer-events:none}
+.hero>*{position:relative;z-index:1}
+
+/* Farbakzente der aktuellen Seite */
+.panel>h2::before{background:linear-gradient(var(--c1),var(--c2))}
+.tabs.side button.active{background:color-mix(in srgb,var(--c1) 13%,transparent);color:var(--c1)}
+.tabs.side button.active::before{background:linear-gradient(var(--c1),var(--c2))}
+[data-theme="dark"] .tabs.side button.active{background:color-mix(in srgb,var(--c2) 24%,transparent);color:color-mix(in srgb,var(--c2) 45%,#fff)}
+.ring-fg{stroke:var(--c2)}
+.page-nav button:hover,.feature:hover,.kpi:hover{border-color:var(--c2)}
+.lessons button.cur{background:color-mix(in srgb,var(--c1) 12%,transparent);color:var(--c1)}
+[data-theme="dark"] .lessons button.cur{color:color-mix(in srgb,var(--c2) 45%,#fff)}
+.lesson-head{border-left:5px solid var(--c2)}
+.card,.lesson-head,.table-wrap,.diagram-wrap{backdrop-filter:saturate(1.1)}
+
+/* Seitenleiste: farbiges Icon-Plättchen je Bereich */
+.tabs.side button i{display:inline-grid;place-items:center;width:1.75rem;height:1.75rem;border-radius:8px;background:var(--soft);font-size:.95rem}
+.tabs.side button.active i{background:linear-gradient(135deg,var(--c1),var(--c2))}
+
+/* Mobil */
+@media(max-width:1000px){
+  .panel>.intro.themed{padding:1.3rem 1.2rem 1.2rem;min-height:0}
+  .intro.themed .illu{width:200px;right:-30px;opacity:.22;filter:none}
+  main::before{display:none}
+}
+@media print{body{background-image:none}.panel>.intro.themed{background:none;color:#000;box-shadow:none}.intro.themed .illu,.panel>.intro.themed::before{display:none}}
+.intro.themed .illu text{text-anchor:start;font-weight:500}

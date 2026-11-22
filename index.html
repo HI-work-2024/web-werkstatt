@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="de" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Web-Werkstatt · Der interaktive Lernpfad zur professionellen Webentwicklung · Ibtissam Hommada</title>
+<meta name="description" content="Interaktiver Lernpfad: Webseiten bauen, hosten, betreiben und verkaufen. Mit Code-Labor, Simulatoren und Rechnern.">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="style-v2.css">
+<link rel="stylesheet" href="css/v3.css">
+<link rel="stylesheet" href="css/themes.css">
+</head>
+<body>
+<a class="skip-main" href="#main">Zum Inhalt springen</a>
+<header class="top">
+  <button class="menu-btn" id="menuBtn" aria-label="Navigation öffnen" aria-expanded="false" aria-controls="sidenav">☰</button>
+  <div class="brand">
+    <svg viewBox="0 0 40 40" class="logo" aria-hidden="true"><path d="M14 10 4 20l10 10M26 10l10 10-10 10M23 6l-6 28" fill="none" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <div><h1>Web-Werkstatt</h1><p class="sub">Bauen · Hosten · Betreiben · Verkaufen</p></div>
+  </div>
+  <div class="gsearch" role="search">
+    <span class="gs-ico" aria-hidden="true">🔍</span>
+    <input id="gSearch" type="search" placeholder="Alles durchsuchen: Lektionen, Begriffe, Befehle …  (Strg+K)" autocomplete="off" aria-label="Suche" aria-controls="gResults" aria-expanded="false">
+    <div id="gResults" class="gs-results" role="listbox" hidden></div>
+  </div>
+  <div class="top-actions">
+    <button class="icon-btn" id="themeBtn" aria-label="Dunkelmodus umschalten" title="Hell/Dunkel">🌙</button>
+    <div class="progress" title="Dein Gesamtfortschritt (lokal gespeichert)">
+      <svg class="ring" viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="15.5" class="ring-bg"/><circle cx="18" cy="18" r="15.5" class="ring-fg" id="ringFg"/></svg>
+      <span id="progressText">0 %</span>
+      <div class="bar" hidden><div id="progressBar"></div></div>
+      <button id="resetAll" class="ghost small" title="Fortschritt zurücksetzen" aria-label="Fortschritt zurücksetzen">↺</button>
+    </div>
+  </div>
+</header>
+
+<div class="shell">
+<nav class="tabs side" id="sidenav" aria-label="Hauptnavigation">
+  <div class="nav-group"><span class="nav-h">Start</span>
+    <button data-tab="start"><i>🏠</i>Übersicht</button>
+    <button data-tab="pfad"><i>🧭</i>Lernpfad</button>
+  </div>
+  <div class="nav-group"><span class="nav-h">Verstehen</span>
+    <button data-tab="web"><i>🌍</i>So funktioniert das Web</button>
+    <button data-tab="backend"><i>🔌</i>Backend &amp; APIs</button>
+    <button data-tab="tools"><i>🧰</i>Werkzeuge</button>
+    <button data-tab="profi"><i>🏆</i>Profi-Wissen</button>
+  </div>
+  <div class="nav-group"><span class="nav-h">Üben</span>
+    <button data-tab="labor"><i>🧪</i>Code-Labor &amp; Projekte</button>
+    <button data-tab="sql"><i>🗄️</i>SQL-Labor</button>
+    <button data-tab="git"><i>🌿</i>Git-Labor</button>
+    <button data-tab="server"><i>🐧</i>Server-Terminal</button>
+  </div>
+  <div class="nav-group"><span class="nav-h">Veröffentlichen &amp; Beruf</span>
+    <button data-tab="hosting"><i>🚀</i>Hosting &amp; DNS</button>
+    <button data-tab="business"><i>💶</i>Verkaufen &amp; Recht</button>
+    <button data-tab="karriere"><i>💼</i>Karriere</button>
+  </div>
+  <div class="nav-group"><span class="nav-h">Festigen</span>
+    <button data-tab="karten"><i>🃏</i>Lernkarten</button>
+    <button data-tab="quiz"><i>❓</i>Quiz</button>
+    <button data-tab="pruefung"><i>🎓</i>Prüfung &amp; Zertifikat</button>
+  </div>
+  <div class="nav-group"><span class="nav-h">Nachschlagen</span>
+    <button data-tab="spick"><i>📑</i>Spickzettel</button>
+    <button data-tab="glossar"><i>📖</i>Glossar</button>
+    <button data-tab="ueber"><i>ℹ️</i>Über &amp; Daten</button>
+  </div>
+  <div class="nav-sig" id="navSig"></div>
+</nav>
+<div class="nav-backdrop" id="navBackdrop" hidden></div>
+
+<main id="main" tabindex="-1">
+<!-- START -->
+<section id="start" class="panel"></section>
+
+<!-- LERNPFAD -->
+<section id="pfad" class="panel">
+  <div class="intro">
+    <h2>Dein Weg vom Einsteiger zum Profi</h2>
+    <p>Neun Stufen, aufeinander aufbauend. Öffne eine Stufe, lies, was du dort lernst, übe im passenden Reiter und hake ab, was du sicher kannst. Realistisch: Stufen 1–3 in 2–3 Monaten bei ~1 Std./Tag; bis zur Jobreife (Stufe 7) eher 9–18 Monate mit eigenen Projekten.</p>
+  </div>
+  <div class="path" id="pathList"></div>
+</section>
+
+<!-- WEB -->
+<section id="web" class="panel">
+  <div class="intro"><h2>Was passiert, wenn du eine Adresse eintippst?</h2><p>Gehe Schritt für Schritt durch eine echte Seitenanfrage. Jeder Schritt hebt im Bild hervor, wer gerade mit wem spricht.</p></div>
+  <div class="diagram-wrap">
+    <svg viewBox="0 0 1000 330" id="reqSvg" class="req">
+      <defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z"/></marker></defs>
+      <g class="node" data-n="browser"><rect x="20" y="120" width="190" height="100" rx="14"/><text x="115" y="162">💻 Browser</text><text x="115" y="190" class="small">dein Rechner (Client)</text></g>
+      <g class="node" data-n="dns"><rect x="400" y="10" width="200" height="90" rx="14"/><text x="500" y="48">📒 DNS</text><text x="500" y="76" class="small">Name → IP-Adresse</text></g>
+      <g class="node" data-n="cdn"><rect x="400" y="235" width="200" height="85" rx="14"/><text x="500" y="270">🛰️ CDN / Proxy</text><text x="500" y="297" class="small">Kopien nahe am Nutzer</text></g>
+      <g class="node" data-n="server"><rect x="790" y="120" width="190" height="100" rx="14"/><text x="885" y="162">🖥️ Server</text><text x="885" y="190" class="small">liefert Seite / API</text></g>
+      <g class="node" data-n="db"><rect x="790" y="255" width="190" height="65" rx="12"/><text x="885" y="294">🗄️ Datenbank</text></g>
+      <path class="lnk" data-l="b-dns" d="M210 140 L400 60"/>
+      <path class="lnk" data-l="b-srv" d="M210 170 L790 170"/>
+      <path class="lnk" data-l="b-cdn" d="M210 200 L400 275"/>
+      <path class="lnk" data-l="cdn-srv" d="M600 275 L790 200"/>
+      <path class="lnk" data-l="srv-db" d="M885 220 L885 255"/>
+      <text x="500" y="160" id="reqLabel" class="lbl"></text>
+    </svg>
+    <div class="stepper"><button id="reqPrev" class="ghost">◀ Zurück</button><span id="reqCount"></span><button id="reqNext">Weiter ▶</button></div>
+    <div id="reqInfo" class="info-box"></div>
+  </div>
+  <h2>Die großen Begriffe auseinanderhalten</h2>
+  <div class="cards three" id="webConcepts"></div>
+  <h2>Wie Seiten entstehen: Rendering-Arten</h2>
+  <div class="table-wrap"><table class="cmp" id="renderTable"></table></div>
+</section>
+
+<!-- LABOR -->
+<section id="labor" class="panel">
+  <div class="intro"><h2>Code-Labor</h2><p>Echtes HTML, CSS und JavaScript, live im Browser ausgeführt. Jede Lektion hat eine Aufgabe; „Prüfen“ testet dein Ergebnis automatisch. Dein Code wird gespeichert.</p></div>
+  <div class="lab">
+    <aside class="lessons" id="lessonList"></aside>
+    <div class="lab-main">
+      <div class="lesson-head" id="lessonHead"></div>
+      <div class="editors">
+        <div class="ed"><div class="ed-tabs" id="edTabs"></div><textarea id="code" spellcheck="false" autocomplete="off"></textarea>
+          <div class="ed-actions"><button id="runBtn">▶ Ausführen</button><button id="checkBtn">✔ Prüfen</button><button id="hintBtn" class="ghost">💡 Tipp</button><button id="solBtn" class="ghost">Lösung</button><button id="resetCode" class="ghost">↺ Zurücksetzen</button></div>
+        </div>
+        <div class="pv"><div class="pv-h">Vorschau</div><iframe id="preview" title="Vorschau"></iframe><div class="console" id="console"><div class="dim">Konsole: Ausgaben von console.log erscheinen hier</div></div></div>
+      </div>
+      <div id="checkOut" class="checks"></div>
+    </div>
+  </div>
+</section>
+
+<!-- SQL -->
+<section id="sql" class="panel"></section>
+
+<!-- GIT -->
+<section id="git" class="panel"></section>
+
+<!-- SERVER -->
+<section id="server" class="panel"></section>
+
+<!-- BACKEND -->
+<section id="backend" class="panel">
+  <div class="intro"><h2>Backend &amp; APIs</h2><p>Das Backend ist der Teil, den man nicht sieht: Server, Daten, Logins, Bezahlungen. Kommuniziert wird über HTTP, meist mit JSON.</p></div>
+  <h2>HTTP-Simulator: Sprich mit einer API</h2>
+  <p class="note">Eine echte kleine Shop-API, die nur in deinem Browser läuft. Wähle Methode und Pfad, sende die Anfrage und sieh dir die rohe Antwort an. Probier auch Fehler aus (falsche ID, fehlender Token).</p>
+  <div class="api">
+    <div class="api-req">
+      <div class="api-line"><select id="apiMethod"><option>GET</option><option>POST</option><option>PUT</option><option>DELETE</option></select><input id="apiPath" value="/api/produkte" spellcheck="false"><button id="apiSend">Senden</button></div>
+      <label class="small-l"><input type="checkbox" id="apiAuth"> Header <code>Authorization: Bearer geheim123</code> mitschicken</label>
+      <label class="small-l">Body (JSON, für POST/PUT)</label>
+      <textarea id="apiBody" spellcheck="false">{ "name": "Maus", "preis": 25 }</textarea>
+      <div class="api-presets" id="apiPresets"></div>
+      <div id="apiTasks" class="api-tasks"></div>
+    </div>
+    <div class="api-res"><div class="pv-h">Rohe HTTP-Kommunikation</div><pre id="apiOut" class="raw">Noch keine Anfrage gesendet.</pre></div>
+  </div>
+  <h2>Statuscodes, die du kennen musst</h2>
+  <div class="cards four" id="statusCodes"></div>
+  <h2>Backend-Bausteine</h2>
+  <div class="gh-layout"><div class="parts" id="beParts"></div><div id="beInfo" class="info-box tall"><b>Klick auf einen Baustein.</b></div></div>
+</section>
+
+<!-- TOOLS -->
+<section id="tools" class="panel">
+  <div class="intro"><h2>Werkzeuge eines Webentwicklers</h2><p>Was Profis täglich nutzen und wann du es lernen solltest.</p></div>
+  <div class="cards three" id="toolCards"></div>
+  <h2>Frameworks im Vergleich</h2>
+  <div class="table-wrap"><table class="cmp" id="fwTable"></table></div>
+  <h2>Welche Technik für welches Projekt?</h2>
+  <div class="chips" id="stackChips"></div>
+  <div id="stackOut" class="info-box"></div>
+</section>
+
+<!-- HOSTING -->
+<section id="hosting" class="panel">
+  <div class="intro"><h2>Hosting &amp; Betrieb</h2><p>Wo deine Seite liegt, wie sie unter deiner Domain erreichbar wird und wie du sie sicher am Laufen hältst.</p></div>
+  <h2>Hosting-Berater</h2>
+  <div class="wizard" id="wizard"></div>
+  <h2>Hosting-Arten im Überblick</h2>
+  <div class="table-wrap"><table class="cmp" id="hostTable"></table></div>
+  <h2>Domain &amp; DNS: Schnellübung</h2>
+  <p class="note">Welcher DNS-Eintrag ist in der Situation richtig? (Typische Einträge: A, AAAA, CNAME, MX, TXT.)</p>
+  <div id="dnsQuiz" class="quiz-box"></div>
+  <h2>Vom Code zur Live-Seite: Deployment</h2>
+  <ol class="steps" id="deploySteps"></ol>
+  <h2>Go-Live-Checkliste</h2>
+  <p class="note">Hake ab, was erledigt ist. Wird gespeichert, auch zum Wiederverwenden bei jedem neuen Projekt (↺ setzt zurück).</p>
+  <div id="launchList" class="checklist"></div>
+  <h2>Laufender Betrieb</h2>
+  <div class="cards three" id="opsCards"></div>
+</section>
+
+<!-- BUSINESS -->
+<section id="business" class="panel">
+  <div class="intro"><h2>Mit Webseiten Geld verdienen</h2><p>Geschäftsmodelle, Preise und die rechtlichen Pflichten in Deutschland. <b>Hinweis:</b> Überblick zur Orientierung, keine Rechts- oder Steuerberatung. Stand der Angaben: 2025/26.</p></div>
+  <h2>Geschäftsmodelle</h2>
+  <div class="cards three flip" id="bizModels"></div>
+  <h2>Stundensatz-Rechner</h2>
+  <div class="calc" id="rateCalc"></div>
+  <h2>Angebots-Kalkulator für eine Website</h2>
+  <div class="calc" id="quoteCalc"></div>
+  <h2>Recht &amp; Pflichten (Deutschland)</h2>
+  <div class="accordion" id="legalList"></div>
+  <h2>Online verkaufen: technische Wege</h2>
+  <div class="table-wrap"><table class="cmp" id="shopTable"></table></div>
+</section>
+
+<!-- PROFI -->
+<section id="profi" class="panel">
+  <div class="intro"><h2>Profi-Wissen</h2><p>Was gute von professionellen Webseiten unterscheidet. Jedes Thema mit Kernwissen und einer Prüfliste für deine Projekte.</p></div>
+  <div class="chips" id="proChips"></div>
+  <div id="proOut"></div>
+</section>
+
+<!-- KARRIERE -->
+<section id="karriere" class="panel"></section>
+
+<!-- SPICKZETTEL -->
+<section id="spick" class="panel"></section>
+
+<!-- LERNKARTEN -->
+<section id="karten" class="panel"></section>
+
+<!-- QUIZ -->
+<section id="quiz" class="panel">
+  <div class="intro"><h2>Wissen testen</h2><p>Wähle einen Bereich. Falsche Antworten kommen am Ende noch einmal.</p></div>
+  <div class="chips" id="quizModes"></div>
+  <div id="quizBox" class="quiz-box"></div>
+</section>
+
+<!-- PRUEFUNG -->
+<section id="pruefung" class="panel"></section>
+
+<!-- GLOSSAR -->
+<section id="glossar" class="panel">
+  <div class="intro"><h2>Glossar</h2><p>Fachbegriffe kurz erklärt.</p></div>
+  <input id="glossSearch" type="search" placeholder="Begriff suchen …" class="search">
+  <dl id="glossList" class="gloss"></dl>
+</section>
+<!-- UEBER -->
+<section id="ueber" class="panel"></section>
+</main>
+</div>
+
+<footer><p>Web-Werkstatt · freies Lernmaterial · Fortschritt bleibt lokal in deinem Browser · Keine Rechtsberatung</p></footer>
+
+<script src="js/config.js"></script>
+<script src="js/content-path.js"></script>
+<script src="js/content-web.js"></script>
+<script src="js/content-lab.js"></script>
+<script src="js/content-lab2.js"></script>
+<script src="js/content-projects.js"></script>
+<script src="js/content-ops.js"></script>
+<script src="js/content-business.js"></script>
+<script src="js/content-quiz.js"></script>
+<script src="js/content-quiz2.js"></script>
+<script src="vendor/sqljs/sql-asm.js"></script>
+<script src="js/vendor-gitsim.js"></script>
+<script src="js/app.js"></script>
+<script src="js/mod-sql.js"></script>
+<script src="js/mod-term.js"></script>
+<script src="js/mod-dns.js"></script>
+<script src="js/mod-exam.js"></script>
+<script src="js/mod-ref.js"></script>
+<script src="js/mod-git.js"></script>
+<script src="js/mod-cards.js"></script>
+<script src="js/mod-shell.js"></script>
+<script src="js/mod-theme.js"></script>
+</body>
+</html>
